@@ -9,6 +9,7 @@ properties([
             name: 'Terraform_Action'
         )])
 ])
+
 pipeline {
     agent any
     stages {
@@ -19,26 +20,26 @@ pipeline {
         }
         stage('Git Pulling') {
             steps {
-                git branch: 'master', url: 'https://github.com/AmanPathak-DevOps/EKS-Terraform-GitHub-Actions.git'
+                git branch: 'master', url: 'https://github.com/Adithya119/Aman-EKS-Terraform-GitHub-Actions.git'
             }
         }
         stage('Init') {
             steps {
-                withAWS(credentials: 'aws-creds', region: 'us-east-1') {
+                withAWS(credentials: 'AWS-CREDS', region: 'ap-south-1') {
                 sh 'terraform -chdir=eks/ init'
                 }
             }
         }
         stage('Validate') {
             steps {
-                withAWS(credentials: 'aws-creds', region: 'us-east-1') {
+                withAWS(credentials: 'AWS-CREDS', region: 'ap-south-1') {
                 sh 'terraform -chdir=eks/ validate'
                 }
             }
         }
         stage('Action') {
             steps {
-                withAWS(credentials: 'aws-creds', region: 'us-east-1') {
+                withAWS(credentials: 'AWS-CREDS', region: 'ap-south-1') {
                     script {    
                         if (params.Terraform_Action == 'plan') {
                             sh "terraform -chdir=eks/ plan -var-file=${params.Environment}.tfvars"

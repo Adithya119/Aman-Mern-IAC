@@ -6,11 +6,11 @@ terraform {
       version = "~> 5.49.0"
     }
   }
-  backend "s3" {
-    bucket         = "my-ews-baket1"
-    region         = "us-east-1"
+  backend "s3" {                                     # S3 bucket & dynamoDB have been created manually
+    bucket         = "s3-for-mern-01"
+    region         = "ap-south-1"
     key            = "eks/terraform.tfstate"
-    dynamodb_table = "Lock-Files"
+    dynamodb_table = "Lock-tf-files"
     encrypt        = true
   }
 }

@@ -20,7 +20,7 @@ pipeline {
         }
         stage('Git Pulling') {
             steps {
-                git branch: 'master', url: 'https://github.com/Adithya119/Aman-EKS-Terraform-GitHub-Actions.git'
+                git branch: 'master', url: 'https://github.com/Adithya119/Aman-Mern-IAC.git'
             }
         }
         stage('Init') {

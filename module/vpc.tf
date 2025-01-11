@@ -41,8 +41,7 @@ resource "aws_subnet" "public-subnet" {
     "kubernetes.io/role/elb"                      = "1"
   }
 
-  depends_on = [aws_vpc.vpc,
-  ]
+  depends_on = [aws_vpc.vpc]
 }
 
 resource "aws_subnet" "private-subnet" {
@@ -59,8 +58,7 @@ resource "aws_subnet" "private-subnet" {
     "kubernetes.io/role/internal-elb"             = "1"
   }
 
-  depends_on = [aws_vpc.vpc,
-  ]
+  depends_on = [aws_vpc.vpc]
 }
 
 
@@ -77,8 +75,7 @@ resource "aws_route_table" "public-rt" {
     env  = var.env
   }
 
-  depends_on = [aws_vpc.vpc
-  ]
+  depends_on = [aws_vpc.vpc]
 }
 
 resource "aws_route_table_association" "public-route-association" {
@@ -98,8 +95,7 @@ resource "aws_eip" "ngw-eip" {
     Name = var.eip-name
   }
 
-  depends_on = [aws_vpc.vpc
-  ]
+  depends_on = [aws_vpc.vpc]
 
 }
 
@@ -112,7 +108,7 @@ resource "aws_nat_gateway" "ngw" {
   }
 
   depends_on = [aws_vpc.vpc,
-    aws_eip.ngw-eip
+    aws_eip.ngw-eip                                ### depends_on
   ]
 }
 
@@ -129,8 +125,7 @@ resource "aws_route_table" "private-rt" {
     env  = var.env
   }
 
-  depends_on = [aws_vpc.vpc,
-  ]
+  depends_on = [aws_vpc.vpc]
 }
 
 resource "aws_route_table_association" "private-rt-association" {
